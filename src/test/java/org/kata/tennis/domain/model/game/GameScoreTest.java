@@ -39,11 +39,7 @@ public class GameScoreTest {
 	}
 
 	@Test
-	@Parameters({ 
-		"FIFTEEN,THIRTY,false",
-		"THIRTY,FORTY,false",
-		"ADVANTAGE,ADVANTAGE,false",
-		"DEUCE,ADVANTAGE,true" })
+	@Parameters({ "FIFTEEN,THIRTY,false", "THIRTY,FORTY,false", "ADVANTAGE,ADVANTAGE,false", "DEUCE,ADVANTAGE,true" })
 	public void scoreShouldIncrementToNext(GameScore given, GameScore expected, boolean deuce) {
 		// GIVEN SCORE ZERO AND DEUCE DEACTIVATED
 		if (deuce) {
@@ -56,11 +52,7 @@ public class GameScoreTest {
 	}
 
 	@Test
-	@Parameters({ 
-		"ZERO,ZERO,false",
-		"FORTY,THIRTY,false",
-		"ADVANTAGE,ADVANTAGE,false",
-		"DEUCE,FORTY,true" })
+	@Parameters({ "ZERO,ZERO,false", "FORTY,THIRTY,false", "ADVANTAGE,ADVANTAGE,false", "DEUCE,FORTY,true" })
 	public void scoreSouldDecrementToPrevious(GameScore given, GameScore expected, boolean deuce) {
 		// GIVEN
 		if (deuce) {

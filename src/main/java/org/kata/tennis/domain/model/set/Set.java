@@ -17,13 +17,13 @@ import org.kata.tennis.domain.model.scores.SetScore;
 import org.kata.tennis.domain.model.tiebreak.TieBreak;
 
 public class Set implements IGame {
-    private Map<Player, List<SetScore>> setScores;
-    private List<Game> games;
-    private Player winner;
-    private TieBreak tieBreak;
-    private SetRulesManager rulesManager = new SetRulesManager(this);
+	private Map<Player, List<SetScore>> setScores;
+	private List<Game> games;
+	private Player winner;
+	private TieBreak tieBreak;
+	private SetRulesManager rulesManager = new SetRulesManager(this);
 
-    public Map<Player, List<SetScore>> getSetScores() {
+	public Map<Player, List<SetScore>> getSetScores() {
 		return setScores;
 	}
 
@@ -32,47 +32,50 @@ public class Set implements IGame {
 	}
 
 	public Set(Player firstPlayer, Player secondPlayer) {
-        this.setScores = new HashMap<>();
-        this.setScores.put(firstPlayer, new ArrayList<>(Collections.singletonList(SetScore.ZERO)));
-        this.setScores.put(secondPlayer, new ArrayList<>(Collections.singletonList(SetScore.ZERO)));
-        this.games = new ArrayList<>(Collections.singletonList(new Game(firstPlayer, secondPlayer)));
-    }
-    
-    @Override
-    public void scores(Player player) throws UnknownPlayerException {
-        if (Objects.nonNull(tieBreak)) {
-        	rulesManager.manageSetScoreWhenTieBreakRuleEnabled(player);
-        } else {
-        	rulesManager.manageSetWhenTieBreakRuleDisabled(player);
-            rulesManager.enableTieBreakRuleIfNecessary();
-        }
-    }
+		this.setScores = new HashMap<>();
+		this.setScores.put(firstPlayer, new ArrayList<>(Collections.singletonList(SetScore.ZERO)));
+		this.setScores.put(secondPlayer, new ArrayList<>(Collections.singletonList(SetScore.ZERO)));
+		this.games = new ArrayList<>(Collections.singletonList(new Game(firstPlayer, secondPlayer)));
+	}
 
-    public Optional<Player> getWinner() {
-        return Optional.ofNullable(winner);
-    }
+	/**
+	 * Le joeur player marque
+	 */
+	@Override
+	public void scores(Player player) throws UnknownPlayerException {
+		if (Objects.nonNull(tieBreak)) {
+			rulesManager.manageSetScoreWhenTieBreakRuleEnabled(player);
+		} else {
+			rulesManager.manageSetWhenTieBreakRuleDisabled(player);
+			rulesManager.enableTieBreakRuleIfNecessary();
+		}
+	}
 
-    public void setPlayerSetScores(Player player, List<SetScore> setScores) {
-        this.setScores.replace(player, setScores);
-    }
+	public Optional<Player> getWinner() {
+		return Optional.ofNullable(winner);
+	}
 
-    public List<SetScore> getPlayerSetScores(Player player) {
-        return Optional.ofNullable(this.setScores.get(player)).orElse(new ArrayList<>());
-    }
+	public void setPlayerSetScores(Player player, List<SetScore> setScores) {
+		this.setScores.replace(player, setScores);
+	}
 
-    public List<Game> getGames() {
-        return games;
-    }
+	public List<SetScore> getPlayerSetScores(Player player) {
+		return Optional.ofNullable(this.setScores.get(player)).orElse(new ArrayList<>());
+	}
 
-    public void setGames(List<Game> games) {
-        this.games = games;
-    }
+	public List<Game> getGames() {
+		return games;
+	}
 
-    public Optional<TieBreak> getTieBreak() {
-        return Optional.ofNullable(tieBreak);
-    }
+	public void setGames(List<Game> games) {
+		this.games = games;
+	}
 
-    public void setTieBreak(TieBreak tieBreak) {
-        this.tieBreak = tieBreak;
-    }
+	public Optional<TieBreak> getTieBreak() {
+		return Optional.ofNullable(tieBreak);
+	}
+
+	public void setTieBreak(TieBreak tieBreak) {
+		this.tieBreak = tieBreak;
+	}
 }

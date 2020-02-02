@@ -12,26 +12,21 @@ import static org.hamcrest.core.Is.is;
 @RunWith(JUnitParamsRunner.class)
 public class SetScoreTest {
 
-    @Test
-    @Parameters({
-            "ZERO,ONE",
-            "TWO,THREE"})
-    public void scoreShouldIncrementToNext(SetScore given, SetScore expected) {
-        //WHEN
-        SetScore result = given.next();
-        //THEN
-        Assert.assertThat(result, is(expected));
-    }
+	@Test
+	@Parameters({ "ZERO,ONE", "TWO,THREE" })
+	public void scoreShouldIncrementToNext(SetScore given, SetScore expected) {
+		// WHEN
+		SetScore result = given.next();
+		// THEN
+		Assert.assertThat(result, is(expected));
+	}
 
-    @Test
-    @Parameters({
-            "ZERO,ZERO",
-            "THREE,TWO"})
-    public void scoreShouldDecrementToPrevious(SetScore given, SetScore expected) {
-        //WHEN
-        SetScore result = given.previous();
-        //THEN
-        Assert.assertThat(result, is(expected));
-    }
+	@Test
+	@Parameters({ "ZERO,ZERO", "THREE,TWO" })
+	public void scoreShouldDecrementToPrevious(SetScore given, SetScore expected) {
+		// WHEN
+		SetScore result = given.previous();
+		// THEN
+		Assert.assertThat(result, is(expected));
+	}
 }
-
